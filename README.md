@@ -13,7 +13,7 @@ ps, err := easyplugin.New("foobar")
 defer ps.Unload()
 ```
 
-The plugin applications located in your `~/.config/foobar/plugin/xxx` will be spawned.
+The plugin applications located in your `~/.config/foobar/plugins/xxx` will be spawned.
 
 ### Client Plugin
 
