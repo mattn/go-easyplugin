@@ -24,7 +24,6 @@ type PluginSystem struct {
 	plugins []*Plugin
 	f       func(string)
 	input   chan string
-	tmp     chan string
 }
 
 func New(name string) (*PluginSystem, error) {
@@ -43,6 +42,7 @@ func New(name string) (*PluginSystem, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer dir.Close()
 	fis, err := dir.Readdir(-1)
 	if err != nil {
 		return nil, err
@@ -157,5 +157,5 @@ func (ps *PluginSystem) CallFor(name string, method string, res interface{}, arg
 		client.Close()
 		return err
 	}
-	return nil
+	return os.ErrNotExist
 }
