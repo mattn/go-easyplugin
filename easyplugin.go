@@ -78,8 +78,12 @@ func New(name string) (*PluginSystem, error) {
 		if err != nil {
 			return nil, err
 		}
+		name := filepath.Base(fi.Name())
+		if ext := filepath.Ext(name); ext != "" {
+			name = name[:len(name)-len(ext)]
+		}
 		plugin := &Plugin{
-			Name:   filepath.Base(fi.Name()),
+			Name:   name,
 			cmd:    cmd,
 			stdin:  stdin,
 			stdout: stdout,
